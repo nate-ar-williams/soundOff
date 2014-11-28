@@ -18,27 +18,28 @@ public class SoundOffActivity extends Activity {
 	private Button soundOffButton;
 	private boolean isSoundOffButtonPressed = false;
 	private TextView lengthTextView;
-	private int lengthIndex = 0;
+	private int lengthIndex = 1;
 	private List<String> lengths = new ArrayList<>();
-	private int numLengths;
+	private static final int NUM_LENGTHS = 25;
 	
 	public SoundOffActivity() {
 		super();
 		initializeLengths();
-		this.numLengths = this.lengths.size();
 	}
 	
 	private void initializeLengths() {
-		for (int i = 0; i < 24; i++) {
+		for (int i = 0; i < NUM_LENGTHS; i++) {
 			if (i == 0) {
-				this.lengths.add(getString(R.string.indefinite));
+				this.lengths.add("Indefinite");
 			}
 			else {
-				String length = i + " hour";
+				StringBuilder sb = new StringBuilder();
+				sb.append(i);
+				sb.append(" hour");
 				if (i != 1) {
-					length += "s";
+					sb.append("s");
 				}
-				this.lengths.add(length);
+				this.lengths.add(sb.toString());
 			}
 		}
 	}
@@ -47,7 +48,7 @@ public class SoundOffActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sound_off);
-		
+
 		this.soundOffButton = (Button) findViewById(R.id.soundOffButton);
 		this.soundOffButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -58,6 +59,7 @@ public class SoundOffActivity extends Activity {
 		});
 		
 		this.lengthTextView = (TextView) findViewById(R.id.textViewLength);
+		resetLength();
 	}
 	
 	public void onClickSoundOffButton(final View view) {
@@ -116,12 +118,12 @@ public class SoundOffActivity extends Activity {
 	}
 	
 	private void resetLength() {
-		this.lengthIndex = 0;
+		this.lengthIndex = 1;
 		this.lengthTextView.setText(this.lengths.get(this.lengthIndex));
 	}
 	
 	public void incrementLengthIndex(View v) {
-		if (this.lengthIndex < this.numLengths - 1) {
+		if (this.lengthIndex < NUM_LENGTHS - 1) {
 			this.lengthIndex++;
 		}
 		else {
@@ -135,7 +137,7 @@ public class SoundOffActivity extends Activity {
 			this.lengthIndex--;
 		}
 		else {
-			this.lengthIndex = this.numLengths - 1;
+			this.lengthIndex = NUM_LENGTHS - 1;
 		}
 		this.lengthTextView.setText(this.lengths.get(this.lengthIndex));
 	}

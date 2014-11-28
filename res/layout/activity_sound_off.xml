@@ -8,7 +8,66 @@
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name" />
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="12sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout 
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_below="@id/textViewTitle"
+		android:layout_above="@+id/soundOffButton" >
+    <!--  <Button
+        android:id="@+id/buttonUp"
+        android:layout_width="wrap_content"
+  	    android:layout_height="wrap_content"
+  	    android:layout_above="@+id/textViewLength"
+  	    android:layout_centerHorizontal="true"
+        android:onClick="incrementLengthIndex"
+        android:text="@string/up_arrow" /> -->
+    
+    <ImageButton
+        android:id="@+id/buttonUp"
+        android:layout_width="wrap_content"
+  	    android:layout_height="wrap_content"
+  	    android:src="@drawable/triangle"
+  	    android:contentDescription="up"
+  	    android:layout_above="@+id/textViewLength"
+  	    android:layout_centerHorizontal="true"
+        android:onClick="incrementLengthIndex"
+        android:text="@string/up_arrow" />
+    
+  <!--   <Button
+        android:id="@+id/buttonDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLength"
+        android:layout_centerHorizontal="true"
+        android:onClick="decrementLengthIndex"
+   	    android:text="@string/down_arrow" /> -->
+    <ImageButton 
+        android:id="@+id/buttonDown"
+        android:contentDescription="down"
+        android:src="@drawable/upside_down_triangle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewLength"
+        android:layout_centerHorizontal="true"
+        android:onClick="decrementLengthIndex"
+   	    android:text="@string/down_arrow"
+        />
+	
+	<TextView
+    	android:id="@+id/textViewLength"
+      	android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+	    android:text="@string/indefinite"
+		android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	</RelativeLayout>
 
     <Button
         android:id="@+id/soundOffButton"
@@ -19,34 +78,4 @@
         android:layout_marginBottom="66dp"
         android:text="@string/sound_off" />
 
-        
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/buttonUp"
-	        android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:onClick="incrementLengthIndex"
-        	android:text="@string/up_arrow" />
-
-	    <TextView
-    	    android:id="@+id/textViewLength"
-        	android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-	        android:text="@string/indefinite"
-			android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-           	android:id="@+id/buttonDown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="decrementLengthIndex"
-   	        android:text="@string/down_arrow" />
-	
-	</LinearLayout>
-		
 </RelativeLayout>
