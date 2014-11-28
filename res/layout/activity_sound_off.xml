@@ -19,34 +19,34 @@
         android:layout_marginBottom="66dp"
         android:text="@string/sound_off" />
 
+        
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/soundOffButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textViewTitle"
+        android:layout_centerInParent="true"
         android:orientation="vertical" >
 
         <Button
             android:id="@+id/buttonUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="/\\" />
+	        android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:onClick="incrementLengthIndex"
+        	android:text="@string/up_arrow" />
 
-        <TextView
-            android:id="@+id/textViewTime"
-            android:layout_width="wrap_content"
+	    <TextView
+    	    android:id="@+id/textViewLength"
+        	android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/indefinite"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+	        android:text="@string/indefinite"
+			android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
-            android:id="@+id/buttonDown"
+           	android:id="@+id/buttonDown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\\/" />
-
-    </LinearLayout>
-
+            android:onClick="decrementLengthIndex"
+   	        android:text="@string/down_arrow" />
+	
+	</LinearLayout>
+		
 </RelativeLayout>

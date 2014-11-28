@@ -1687,7 +1687,7 @@ containing a value of this type.
         public static final int split_action_bar=0x7f090004;
         public static final int submit_area=0x7f09003c;
         public static final int tabMode=0x7f09000c;
-        public static final int textViewTime=0x7f090042;
+        public static final int textViewLength=0x7f090042;
         public static final int textViewTitle=0x7f09003f;
         public static final int title=0x7f090027;
         public static final int up=0x7f090001;
@@ -1805,11 +1805,11 @@ containing a value of this type.
          */
         public static final int abc_toolbar_collapse_description=0x7f0a0004;
         public static final int app_name=0x7f0a0010;
-        public static final int indefinite=0x7f0a0015;
+        public static final int down_arrow=0x7f0a0015;
+        public static final int indefinite=0x7f0a0013;
         public static final int sound_off=0x7f0a0011;
         public static final int sound_on=0x7f0a0012;
-        public static final int time_one=0x7f0a0013;
-        public static final int time_two=0x7f0a0014;
+        public static final int up_arrow=0x7f0a0014;
     }
     public static final class style {
         /** 

@@ -4,8 +4,8 @@
     <string name="app_name">SoundOff</string>
     <string name="sound_off">SOUND OFF</string>
     <string name="sound_on">SOUND ON</string>
-    <string name="time_one">01:00</string>
-    <string name="time_two">02:00</string>
-    <string name="indefinite">INDEFINITE</string>
+    <string name="indefinite">Indefinite</string>
+    <string name="up_arrow">/\\</string>
+    <string name="down_arrow">\\/</string>
 
 </resources>

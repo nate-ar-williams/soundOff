@@ -1,16 +1,47 @@
 package com.narwilliamsburg.soundoff;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class SoundOffActivity extends Activity {
 
 	private Button soundOffButton;
 	private boolean isSoundOffButtonPressed = false;
+	private TextView lengthTextView;
+	private int lengthIndex = 0;
+	private List<String> lengths = new ArrayList<>();
+	private int numLengths;
+	
+	public SoundOffActivity() {
+		super();
+		initializeLengths();
+		this.numLengths = this.lengths.size();
+	}
+	
+	private void initializeLengths() {
+		for (int i = 0; i < 24; i++) {
+			if (i == 0) {
+				this.lengths.add(getString(R.string.indefinite));
+			}
+			else {
+				String length = i + " hour";
+				if (i != 1) {
+					length += "s";
+				}
+				this.lengths.add(length);
+			}
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +56,32 @@ public class SoundOffActivity extends Activity {
 				onClickSoundOffButton(v);
 			}
 		});
+		
+		this.lengthTextView = (TextView) findViewById(R.id.textViewLength);
 	}
 	
-	public void onClickSoundOffButton(View view) {
-		SoundOffActivity.this.isSoundOffButtonPressed = !SoundOffActivity.this.isSoundOffButtonPressed;
-		AudioManager audioManager = (AudioManager) view
+	public void onClickSoundOffButton(final View view) {
+		this.isSoundOffButtonPressed = !this.isSoundOffButtonPressed;
+		final AudioManager audioManager = (AudioManager) view
 					.getContext()
 					.getSystemService(Context.AUDIO_SERVICE);
 		setAllStreamMutes(this.isSoundOffButtonPressed, audioManager);
-		toggleButtonText();
+		toggleSoundOffButtonText();
+		if (this.lengthIndex == 0) {
+			return;
+		}
+		Handler handler = new Handler();
+		Runnable finished = new Runnable() {
+			
+			@Override
+			public void run() {
+					resetLength();
+					onClickSoundOffButton(view);
+				}
+		};
+		handler.postDelayed(
+				finished,
+				TimeUnit.HOURS.toMillis(this.lengthIndex));
 	}
 	
 	private void setAllStreamMutes(boolean shouldMute, AudioManager audioManager) {
@@ -50,6 +98,7 @@ public class SoundOffActivity extends Activity {
 		audioManager.setStreamMute(AudioManager.STREAM_MUSIC, shouldMute);
 		audioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, shouldMute);
 		audioManager.setStreamMute(AudioManager.STREAM_SYSTEM, shouldMute);
+		audioManager.setStreamMute(AudioManager.STREAM_ALARM, shouldMute);
 		
 		// We can't do this on API 8
 		//if (audioManager.isVolumeFixed()) {
@@ -57,12 +106,37 @@ public class SoundOffActivity extends Activity {
 		//}
 	}
 	
-	private void toggleButtonText() {
+	private void toggleSoundOffButtonText() {
 		if (this.isSoundOffButtonPressed) {
 			this.soundOffButton.setText(R.string.sound_on);
 		}
 		else {
 			this.soundOffButton.setText(R.string.sound_off);
 		}
+	}
+	
+	private void resetLength() {
+		this.lengthIndex = 0;
+		this.lengthTextView.setText(this.lengths.get(this.lengthIndex));
+	}
+	
+	public void incrementLengthIndex(View v) {
+		if (this.lengthIndex < this.numLengths - 1) {
+			this.lengthIndex++;
+		}
+		else {
+			this.lengthIndex = 0;
+		}
+		this.lengthTextView.setText(this.lengths.get(this.lengthIndex));
+	}
+	
+	public void decrementLengthIndex(View v) {
+		if (this.lengthIndex > 0) {
+			this.lengthIndex--;
+		}
+		else {
+			this.lengthIndex = this.numLengths - 1;
+		}
+		this.lengthTextView.setText(this.lengths.get(this.lengthIndex));
 	}
 }
